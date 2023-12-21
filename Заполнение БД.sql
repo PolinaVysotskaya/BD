@@ -1,15 +1,3 @@
-CREATE SCHEMA IF NOT EXISTS NEW_YEAR;
-set search_path = NEW_YEAR, public;
-
--- Создание таблицы Страны
-DROP TABLE IF EXISTS COUNTRY CASCADE;
-CREATE TABLE COUNTRY (
-    id_country SERIAL PRIMARY KEY,
-    timezone VARCHAR(255) DEFAULT ('GMT'),
-    name_of_the_country VARCHAR(255) UNIQUE,
-    CONSTRAINT uq_country_name UNIQUE (name_of_the_country)
-);
-
 INSERT INTO COUNTRY (id_country, timezone, name_of_the_country) VALUES (1, 'GMT+5:30', 'Индия');
 INSERT INTO COUNTRY (id_country, timezone, name_of_the_country) VALUES (2, 'GMT+8:00', 'Китай');
 INSERT INTO COUNTRY (id_country, timezone, name_of_the_country) VALUES (3, 'GMT+9:00', 'Япония');
@@ -18,62 +6,25 @@ INSERT INTO COUNTRY (id_country, timezone, name_of_the_country) VALUES (5, 'GMT+
 INSERT INTO COUNTRY (id_country, timezone, name_of_the_country) VALUES (6, 'GMT+1:00', 'Великобритания');
 INSERT INTO COUNTRY (id_country, timezone, name_of_the_country) VALUES (7, 'GMT+2:00', 'Франция');
 INSERT INTO COUNTRY (id_country, timezone, name_of_the_country) VALUES (8, 'GMT+1:00', 'Германия');
-
--- Создание таблицы Дети
-DROP TABLE IF EXISTS CHILD CASCADE;
-CREATE TABLE CHILD (
-    id_child SERIAL PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    age INTEGER check (age between 0 and 19),
-    gender VARCHAR(10) check (gender = 'male' OR gender = 'female'),
-    CONSTRAINT uq_name UNIQUE (first_name, last_name),
-    id_country SERIAL REFERENCES COUNTRY(id_country)
-);
-
 INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (1, 'Антон', 'Прошин', 19, 'male', 5);
-INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (2, 'Алина', 'Смирнова', 7, 'female', 1);
+INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (2, 'Алина', 'Мухаметвалиева', 7, 'female', 1);
 INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (3, 'Мария', 'Козлова', 9, 'female', 2);
-INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (4, 'Елена', 'Соколова', 11, 'female', 3);
+INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (4, 'Александра', 'Афанасьева', 11, 'female', 3);
 INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (5, 'Ульяна', 'Вертелко', 8, 'female', 1);
 INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (6, 'Владимир', 'Басов', 14, 'male', 6);
 INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (7, 'Александр', 'Ефимов', 19, 'male', 7);
-INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (8, 'Екатерина', 'Кузнецова', 15, 'female', 8);
+INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (8, 'Полина', 'Высоцкая', 15, 'female', 8);
 INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (9, 'Арсений', 'Барашко', 6, 'male', 4);
 INSERT INTO CHILD (id_child, first_name, last_name, age, gender, id_country) VALUES (10, 'Анастасия', 'Петрова', 10, 'female', 5);
-
--- Создание таблицы Эльфы
-DROP TABLE IF EXISTS ELF CASCADE;
-CREATE TABLE ELF (
-    id_elf SERIAL PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    rating INTEGER check (rating >= 0),
-    position VARCHAR(255) NOT NULL,
-    update_position DATE DEFAULT NOW(),
-    CONSTRAINT uq_elf_name UNIQUE (first_name, last_name),
-    id_country SERIAL REFERENCES COUNTRY(id_country)
-);
-
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (1, 'Харольд', 'Харольдсон', 28, 'доставка подарков', 1);
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (2, 'Луна', 'Тильда', 7, 'управление санями', 3);
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (3, 'Тимофей', 'Соснин', 1, 'доставка подарков', 5);
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (4, 'Берти', 'Бэгшот', 19, 'украшение новогодних подарков', 2);
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (5, 'Гилберт', 'Гринготтс', 10, 'управление санями', 6);
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (6, 'Дороти', 'Доу', 5, 'доставка подарков', 4);
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (7, 'Мариам', 'Мэнси', 22, 'доставка подарков', 5);
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (8, 'Саймон', 'Лаун', 6, 'доставка подарков', 7);
-INSERT INTO ELF(id_elf, first_name, last_name, rating, position, id_country) VALUES (9, 'Тиль', 'Шэдоу', 13, 'украшение новогодних подарков', 8);
-
--- Создание таблицы Доставки
-DROP TABLE IF EXISTS DELIVERY CASCADE;
-CREATE TABLE DELIVERY (
-    id_delivery SERIAL PRIMARY KEY,
-    delivery_time varchar(5) check (delivery_time like '__:__'),
-    delivery_estimate INTEGER check (delivery_estimate between 0 AND 10),
-    id_elf SERIAL REFERENCES ELF(id_elf)
-);
-
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (1, 'Харольд', 'Харольдсон', 28, 'доставка подарков', NOW() , 1);
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (2, 'Луна', 'Тильда', 7, 'управление санями', NOW(), 3);
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (3, 'Тимофей', 'Соснин', 1, 'доставка подарков', NOW(), 5);
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (4, 'Берти', 'Бэгшот', 19, 'украшение новогодних подарков', NOW(), 2);
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (5, 'Гилберт', 'Гринготтс', 10, 'управление санями', NOW(), 6);
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (6, 'Дороти', 'Доу', 5, 'доставка подарков', NOW(), 4);
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (7, 'Мариам', 'Мэнси', 22, 'доставка подарков', NOW(), 5);
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (8, 'Саймон', 'Лаун', 6, 'доставка подарков', NOW(), 7);
+INSERT INTO ELF(id_elf, first_name, last_name, rating, position, update_position, id_country) VALUES (9, 'Тиль', 'Шэдоу', 13, 'украшение новогодних подарков', NOW(), 8);
 INSERT INTO DELIVERY(id_delivery, delivery_time, delivery_estimate, id_elf) VALUES (1, '00:01', 8, 1);
 INSERT INTO DELIVERY(id_delivery, delivery_time, delivery_estimate, id_elf) VALUES (2, '00:00', 7, 2);
 INSERT INTO DELIVERY(id_delivery, delivery_time, delivery_estimate, id_elf) VALUES (3, '00:05', 1, 3);
@@ -92,18 +43,6 @@ INSERT INTO DELIVERY(id_delivery, delivery_time, delivery_estimate, id_elf) VALU
 INSERT INTO DELIVERY(id_delivery, delivery_time, delivery_estimate, id_elf) VALUES (16, '00:09', 4, 7);
 INSERT INTO DELIVERY(id_delivery, delivery_time, delivery_estimate, id_elf) VALUES (17, '00:00', 10, 1);
 INSERT INTO DELIVERY(id_delivery, delivery_time, delivery_estimate, id_elf) VALUES (18, '00:03', 10, 1);
-
--- Создание таблицы Подарки
-DROP TABLE IF EXISTS GIFT CASCADE;
-CREATE TABLE GIFT (
-    id_gift SERIAL PRIMARY KEY,
-    gift_name VARCHAR(255) NOT NULL,
-    weight FLOAT check (weight between 0. AND 50.),
-    gift_price DECIMAL DEFAULT (0),
-
-    id_delivery SERIAL REFERENCES DELIVERY(id_delivery)
-);
-
 INSERT INTO GIFT(id_gift, gift_name, weight, gift_price, id_delivery) VALUES (1, 'Свитер', 1.5, 5000, 1);
 INSERT INTO GIFT(id_gift, gift_name, weight, gift_price, id_delivery) VALUES (2, 'Коньки', 3, 10000, 1);
 INSERT INTO GIFT(id_gift, gift_name, weight, gift_price, id_delivery) VALUES (3, 'Айфон', 0.2, 90000, 2);
@@ -126,17 +65,6 @@ INSERT INTO GIFT(id_gift, gift_name, weight, gift_price, id_delivery) VALUES (19
 INSERT INTO GIFT(id_gift, gift_name, weight, gift_price, id_delivery) VALUES (20, 'Парфюм', 0.2, 10000, 16);
 INSERT INTO GIFT(id_gift, gift_name, weight, gift_price, id_delivery) VALUES (21, 'Шарф', 0.2, 3000, 17);
 INSERT INTO GIFT(id_gift, gift_name, weight, gift_price, id_delivery) VALUES (22, 'Наушники', 0.2, 15000, 18);
-
--- Создание таблицы Платежей
-DROP TABLE IF EXISTS PAYMENT CASCADE;
-CREATE TABLE PAYMENT (
-    id_payment SERIAL PRIMARY KEY,
-    type_of_payment VARCHAR(255) check (type_of_payment = 'by cash' OR type_of_payment = 'by bank card'
-                                            OR type_of_payment = 'by a gift' OR type_of_payment = 'by sweets'),
-    "check" DECIMAL DEFAULT(0),
-    id_delivery SERIAL REFERENCES DELIVERY(id_delivery)
-);
-
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check", id_delivery) VALUES (1, 'by cash', 1, 1);
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check", id_delivery) VALUES (2, 'by cash', 1, 1);
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check", id_delivery) VALUES (3, 'by bank card', 0, 2);
@@ -159,15 +87,6 @@ INSERT INTO PAYMENT (id_payment, type_of_payment, "check", id_delivery) VALUES (
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check", id_delivery) VALUES (20, 'by bank card', 0, 16);
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check", id_delivery) VALUES (21, 'by cash', 0, 17);
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check", id_delivery) VALUES (22, 'by bank card', 1, 18);
-
--- Создание таблицы Связь Детей и Подарков
-DROP TABLE IF EXISTS CHILD_X_GIFT CASCADE;
-CREATE TABLE CHILD_X_GIFT (
-    id_child SERIAL REFERENCES new_year.child(id_child),
-    id_gift SERIAL REFERENCES new_year.gift(id_gift),
-    primary key (id_child, id_gift)
-);
-
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(1,4);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(1,7);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(1,20);
@@ -191,28 +110,3 @@ INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(9,14);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(9,11);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(9,15);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(9,19);
-
--- Создание таблицы Изменений Детей
-DROP TABLE IF EXISTS CHILDREN_HISTORY CASCADE;
-CREATE TABLE CHILDREN_HISTORY
-(
-    id_child       SERIAL UNIQUE,
-    old_country    VARCHAR(255) NOT NULL,
-    old_age        INTEGER,
-    old_gender     CHAR(1),
-    CONSTRAINT pk_child_history PRIMARY KEY (id_child),
-    CONSTRAINT fk_child_history_child FOREIGN KEY (id_child) REFERENCES new_year.CHILD(id_child)
-);
-
--- Создание таблицы Изменений Эльфов
-DROP TABLE IF EXISTS ELF_HISTORY CASCADE;
-CREATE TABLE ELF_HISTORY
-(
-    id_elf SERIAL UNIQUE,
-    position_from DATE,
-    position_to DATE DEFAULT NOW(),
-    old_rating INTEGER,
-    old_position VARCHAR(255) NOT NULL,
-    CONSTRAINT pk_elf_history PRIMARY KEY (id_elf),
-    CONSTRAINT fk_elf_history_elf FOREIGN KEY (id_elf) REFERENCES new_year.ELF(id_elf)
-);
