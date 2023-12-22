@@ -18,6 +18,7 @@ CREATE TABLE CHILD (
     last_name VARCHAR(255) NOT NULL,
     age INTEGER check (age between 0 and 19),
     gender VARCHAR(10) check (gender = 'male' OR gender = 'female'),
+    valid_from TIMESTAMP DEFAULT NOW(),
     CONSTRAINT uq_name UNIQUE (first_name, last_name),
     id_country SERIAL REFERENCES COUNTRY(id_country)
 );
@@ -66,8 +67,8 @@ CREATE TABLE PAYMENT (
 -- Создание таблицы Связь Детей и Подарков
 DROP TABLE IF EXISTS CHILD_X_GIFT CASCADE;
 CREATE TABLE CHILD_X_GIFT (
-    id_child SERIAL REFERENCES new_year.child(id_child),
-    id_gift SERIAL REFERENCES new_year.gift(id_gift),
+    id_child SERIAL REFERENCES NEW_YEAR.child(id_child),
+    id_gift SERIAL REFERENCES NEW_YEAR.gift(id_gift),
     primary key (id_child, id_gift)
 );
 
@@ -76,9 +77,9 @@ DROP TABLE IF EXISTS CHILDREN_HISTORY CASCADE;
 CREATE TABLE CHILDREN_HISTORY
 (
     id_child INTEGER,
-    country VARCHAR(255) NOT NULL,
-    valid_from DATE DEFAULT NOW(),
-    valid_to DATE DEFAULT '2999-12-31',
+    id_country INTEGER,
+    valid_from TIMESTAMP DEFAULT NOW(),
+    valid_to TIMESTAMP DEFAULT '2999-12-31',
     PRIMARY KEY (id_child, valid_from)
 );
 
@@ -94,4 +95,3 @@ CREATE TABLE ELF_HISTORY
     pos_valid_to TIMESTAMP DEFAULT NOW(), -- ставим в момент когда именения произошли
     PRIMARY KEY (id_elf, pos_valid_from)
 );
-
