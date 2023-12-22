@@ -1,6 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS LOGICAL_TABLE;
 set search_path = LOGICAL_TABLE, public;
----
+
 -- Создание таблицы Страны
 DROP TABLE IF EXISTS COUNTRY CASCADE;
 CREATE TABLE COUNTRY (
@@ -18,6 +18,7 @@ CREATE TABLE CHILD (
     last_name VARCHAR(255) NOT NULL,
     age INTEGER check (age between 0 and 19),
     gender VARCHAR(10) check (gender = 'male' OR gender = 'female'),
+    valid_from TIMESTAMP DEFAULT NOW(),
     CONSTRAINT uq_name UNIQUE (first_name, last_name),
     id_country SERIAL REFERENCES COUNTRY(id_country)
 );
@@ -30,6 +31,7 @@ CREATE TABLE ELF (
     last_name VARCHAR(255) NOT NULL,
     rating INTEGER check (rating >= 0),
     position VARCHAR(255) NOT NULL,
+    pos_valid_from TIMESTAMP DEFAULT NOW(), -- сейчас мы его добавили и сейчас он вышел на позицию если не сейчас, то прописано когда
     CONSTRAINT uq_elf_name UNIQUE (first_name, last_name),
     id_country SERIAL REFERENCES COUNTRY(id_country)
 );
@@ -75,9 +77,9 @@ DROP TABLE IF EXISTS CHILDREN_HISTORY CASCADE;
 CREATE TABLE CHILDREN_HISTORY
 (
     id_child INTEGER,
-    country VARCHAR(255) NOT NULL,
-    valid_from DATE DEFAULT NOW(),
-    valid_to DATE DEFAULT '2999-12-31',
+    id_country INTEGER,
+    valid_from TIMESTAMP DEFAULT NOW(),
+    valid_to TIMESTAMP DEFAULT '2999-12-31',
     PRIMARY KEY (id_child, valid_from)
 );
 
@@ -89,8 +91,8 @@ CREATE TABLE ELF_HISTORY
     id_elf INTEGER,
     rating INTEGER check (rating >= 0),
     position VARCHAR(255) NOT NULL,
-    pos_valid_from DATE DEFAULT NOW(),
-    pos_valid_to DATE DEFAULT '2999-12-31',
+    pos_valid_from TIMESTAMP DEFAULT NOW(), -- уже есть
+    pos_valid_to TIMESTAMP DEFAULT NOW(), -- ставим в момент когда именения произошли
     PRIMARY KEY (id_elf, pos_valid_from)
 );
 
