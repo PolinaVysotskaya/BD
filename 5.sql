@@ -17,7 +17,6 @@ UPDATE CHILD SET gender = 'male' WHERE id_child = 5;
 SELECT * FROM DELIVERY WHERE id_elf = 10;
 SELECT first_name FROM ELF WHERE position = 'доставка подарков';
 
-
 INSERT INTO GIFT(gift_name, weight, gift_price, id_delivery) VALUES ('Кофемашина', 0.5, 100000, 10);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(12,25);
 UPDATE DELIVERY SET delivery_estimate = 8 WHERE id_delivery = 10;
