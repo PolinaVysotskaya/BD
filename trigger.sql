@@ -20,3 +20,18 @@ UPDATE ELF SET rating = 16666, position = 'больше не эльф', pos_vali
 UPDATE ELF SET rating = 0, position = 'больше не эльф' WHERE id_elf = 4; --сработает
 UPDATE ELF SET rating = 5, position = 'больше не эльф' WHERE id_elf = 4; -- не сработает
 
+-- отслеживание изменение страны ребенка
+ CREATE OR REPLACE FUNCTION tracking_updates_child_countries()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO CHILDREN_HISTORY(id_child, country, valid_from, valid_to)
+  VALUES (OLD.id_child, OLD.country, NEW.valid_from, NOW());
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+--DROP TRIGGER tracking_updates ON ELF;
+
+CREATE TRIGGER tracking_updates_child_history
+AFTER UPDATE ON CHILD
+FOR EACH ROW EXECUTE PROCEDURE tracking_updates_child_countries();
