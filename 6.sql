@@ -72,3 +72,38 @@ WHERE ELF.id_country IN(
     WHERE name_of_the_country = 'Россия'
 )
 GROUP BY ELF.first_name;
+
+
+-- хотим вывести по убыванию суммарный рейтинг эльфов по странам (исключая Россию),
+-- но и вывести рейтинг каждого эльфа из этих стран
+
+SELECT first_name, name_of_the_country, elf_sum, rating
+FROM (
+    SELECT ELF.first_name,
+           name_of_the_country,
+           ELF.rating,
+           sum(ELF.rating) OVER (PARTITION BY COUNTRY.id_country) as elf_sum
+    FROM ELF
+    INNER JOIN COUNTRY
+        on ELF.id_country = COUNTRY.id_country
+     ) tbl
+WHERE
+    name_of_the_country <> 'Россия'
+ORDER BY elf_sum DESC;
+
+
+-- хотим посмотреть на колличество уже оплаченных доставок разного типа и какие эльфы их развозили
+SELECT ELF.first_name, type_of_payment, count_of_del
+FROM (
+    SELECT PAYMENT."check",
+           type_of_payment,
+           DELIVERY.id_delivery,
+           DELIVERY.id_elf as elf,
+           count(*) OVER (PARTITION BY type_of_payment) as count_of_del
+FROM PAYMENT
+INNER JOIN DELIVERY
+    on PAYMENT.id_payment = DELIVERY.id_delivery
+WHERE "check" = 1
+     ) tbl
+INNER JOIN ELF
+on ELF.id_elf = tbl.elf;
