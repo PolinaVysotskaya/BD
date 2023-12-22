@@ -150,11 +150,11 @@ INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) 
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(1,28,'доставка подарков','2002-01-01','2999-12-31');
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(2,7,'управление санями','2006-01-01','2999-12-31');
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(3,1,'доставка подарков','2007-01-01','2999-12-31');
-INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(7,2,'украшение новогодних подарков','2001-01-01','2017-12-31'); --
+INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(7,2,'украшение новогодних подарков','2001-01-01','2022-12-31'); --
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(4,19,'украшение новогодних подарков','2009-01-01','2999-12-31');
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(5,10,'управление санями','1990-01-01','2999-12-31');
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(6,5,'доставка подарков','2012-01-01','2999-12-31');
-INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(7,22,'доставка подарков','2018-01-01','2999-12-31');
+INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(7,22,'доставка подарков','2022-01-01','2999-12-31');
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(8,6,'доставка подарков','1997-01-01','2999-12-31');
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(9,13,'украшение новогодних подарков','2002-01-01','2999-12-31');
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(10,8,'доставка подарков','2022-01-01','2999-12-31');
