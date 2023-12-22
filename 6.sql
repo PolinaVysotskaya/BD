@@ -1,4 +1,3 @@
-
 -- хотим проверить, что баллы эльфов совпадают с суммой баллов по их доставкам
 SELECT ELF.first_name, sum(delivery_estimate), ELF.rating
     FROM DELIVERY
