@@ -19,3 +19,4 @@ UPDATE ELF SET rating = 300, position = 'украшение новогодних
 UPDATE ELF SET rating = 16666, position = 'больше не эльф', pos_valid_from = NOW() WHERE id_elf = 1;
 UPDATE ELF SET rating = 0, position = 'больше не эльф' WHERE id_elf = 4; --сработает
 UPDATE ELF SET rating = 5, position = 'больше не эльф' WHERE id_elf = 4; -- не сработает
+
