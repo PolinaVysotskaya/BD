@@ -1,0 +1,30 @@
+
+-- хотим найти подарки с весом больше 1.0 и ценой не меньше 10000, отсортировать поубыванию веса (потом по убыванию цены)
+SELECT * FROM GIFT
+         WHERE weight > 1.0 AND gift_price >= 10000
+ORDER BY weight, gift_price;
+
+-- хотим найти какие дети в новый год получили в подарок электронику и какой эльф обслуживал эти доставки
+-- также выведем рейтинг этих доставок
+SELECT CHILD.first_name as child, GIFT.gift_name as gift, ELF.first_name as elf, DELIVERY.delivery_estimate
+    FROM CHILD
+INNER JOIN CHILD_X_GIFT
+    on CHILD.id_child= CHILD_X_GIFT.id_child
+INNER JOIN GIFT
+    on GIFT.id_gift = CHILD_X_GIFT.id_gift
+INNER JOIN DELIVERY
+    on GIFT.id_delivery= DELIVERY.id_delivery
+INNER JOIN ELF
+    on DELIVERY.id_elf= ELF.id_elf
+WHERE GIFT.gift_name = 'Часы' OR GIFT.gift_name ='Айфон15' OR
+      GIFT.gift_name ='Айфон13' OR GIFT.gift_name ='Наушники' OR
+      GIFT.gift_name ='Компьютер' OR GIFT.gift_name ='Планшет';
+
+-- хотим посчитать количество эльфов со средним рейтингом за доставки больше 5, которые занимаются доставкой подарков
+SELECT count(ELF.first_name)
+FROM ELF
+INNER JOIN DELIVERY
+    on ELF.id_elf= DELIVERY.id_elf
+WHERE ELF.position = 'доставка подарков'
+GROUP BY ELF.id_elf, ELF.first_name, ELF.position
+HAVING avg(DELIVERY.delivery_estimate) > 5;
