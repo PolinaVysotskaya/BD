@@ -24,7 +24,6 @@ WHERE GIFT.gift_name = 'Часы' OR GIFT.gift_name ='Айфон15' OR
 GROUP BY gender
 HAVING sum(gift_price) > 120000;
 
-
 -- хотим вывести эльфов со средним рейтингом за доставки подарков больше 5
 SELECT ELF.first_name, avg(DELIVERY.delivery_estimate)
 FROM ELF
