@@ -222,6 +222,7 @@ INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(11,23);
 --1
 CREATE VIEW view_country AS
 SELECT
+    NULL AS id_country,
     timezone,
     name_of_the_country
 FROM
@@ -294,5 +295,24 @@ JOIN
 JOIN
     GIFT g ON cxg.id_gift = g.id_gift;
 
---8 на таблицу CHILD_HISTORY
---9 на таблицу ELF_HISTORY
+--8
+CREATE OR REPLACE VIEW children_history_view AS
+SELECT
+    NULL AS id_child, -- Маскировка id_child
+    NULL AS id_country,
+    valid_from,
+    valid_to
+FROM
+    CHILDREN_HISTORY;
+
+--9
+CREATE OR REPLACE VIEW elf_history_view AS
+SELECT
+    'ELF*****' AS masked_id_elf,
+    rating,
+    SUBSTRING(position FROM 1 FOR 1) || REPEAT('*', LENGTH(position) - 1) AS masked_position,
+    pos_valid_from,
+    pos_valid_to
+FROM
+    ELF_HISTORY
+ORDER BY rating DESC;
