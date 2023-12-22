@@ -11,7 +11,6 @@ INSERT INTO COUNTRY (timezone, name_of_the_country) VALUES ('GMT+1:00', 'Вел�
 INSERT INTO COUNTRY (timezone, name_of_the_country) VALUES ('GMT+2:00', 'Франция');
 INSERT INTO COUNTRY (timezone, name_of_the_country) VALUES ('GMT+1:00', 'Германия');
 
-
 INSERT INTO CHILD (first_name, last_name, age, gender, id_country) VALUES ('Антон', 'Прошин', 19, 'male', 5);
 INSERT INTO CHILD (first_name, last_name, age, gender, id_country) VALUES ('Алина', 'Смирнова', 7, 'female', 1);
 INSERT INTO CHILD (first_name, last_name, age, gender, id_country) VALUES ('Мария', 'Козлова', 9, 'female', 2);
@@ -25,16 +24,16 @@ INSERT INTO CHILD (first_name, last_name, age, gender, id_country) VALUES ('Ан
 INSERT INTO CHILD (first_name, last_name, age, gender, id_country) VALUES ('Полина', 'Высоцкая', 5, 'female', 8);
 INSERT INTO CHILD (first_name, last_name, age, gender, id_country) VALUES ('Саса', 'Афанасьева', 4, 'female', 6);
 
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Харольд', 'Харольдсон', 28, 'доставка подарков', 1);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Луна', 'Тильда', 7, 'управление санями', 3);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Тимофей', 'Соснин', 1, 'доставка подарков', 5);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Берти', 'Бэгшот', 19, 'украшение новогодних подарков', 2);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Гилберт', 'Гринготтс', 10, 'управление санями', 6);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Дороти', 'Доу', 5, 'доставка подарков', 4);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Мариам', 'Мэнси', 22, 'доставка подарков', 5);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Саймон', 'Лаун', 6, 'доставка подарков', 7);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Тиль', 'Шэдоу', 13, 'украшение новогодних подарков', 8);
-INSERT INTO ELF(first_name, last_name, rating, position, id_country) VALUES ('Дарья', 'Маринина', 8, 'доставка подарков', 8);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Харольд', 'Харольдсон', 28, 'доставка подарков', NOW(), 1);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Луна', 'Тильда', 7, 'управление санями', NOW(), 3);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Тимофей', 'Соснин', 1, 'доставка подарков', NOW(), 5);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Берти', 'Бэгшот', 19, 'украшение новогодних подарков', NOW(), 2);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Гилберт', 'Гринготтс', 10, 'управление санями', NOW(), 6);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Дороти', 'Доу', 5, 'доставка подарков', NOW(), 4);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Мариам', 'Мэнси', 22, 'доставка подарков', NOW(), 5);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Саймон', 'Лаун', 6, 'доставка подарков', NOW(), 7);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Тиль', 'Шэдоу', 13, 'украшение новогодних подарков', NOW(), 8);
+INSERT INTO ELF(first_name, last_name, rating, position, pos_valid_from, id_country) VALUES ('Дарья', 'Маринина', 8, 'доставка подарков', NOW(), 8);
 
 INSERT INTO DELIVERY(delivery_time, delivery_estimate, id_elf) VALUES ('00:01', 8, 1);
 INSERT INTO DELIVERY(delivery_time, delivery_estimate, id_elf) VALUES ('00:00', 7, 2);
@@ -80,7 +79,6 @@ INSERT INTO GIFT(gift_name, weight, gift_price, id_delivery) VALUES ('Игруш
 INSERT INTO GIFT(gift_name, weight, gift_price, id_delivery) VALUES ('Наушники', 0.2, 15000, 18);
 INSERT INTO GIFT(gift_name, weight, gift_price, id_delivery) VALUES ('ИУП', 0.2, 79000, 19);
 
-
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check") VALUES (1, 'by cash', 1);
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check") VALUES (2, 'by bank card', 0);
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check") VALUES (3, 'by bank card', 0);
@@ -100,7 +98,6 @@ INSERT INTO PAYMENT (id_payment, type_of_payment, "check") VALUES (16, 'by bank 
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check") VALUES (17, 'by cash', 0);
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check") VALUES (18, 'by bank card', 1);
 INSERT INTO PAYMENT (id_payment, type_of_payment, "check") VALUES (19, 'by a gift', 1);
-
 
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(1,4);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(1,7);
@@ -127,7 +124,6 @@ INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(9,15);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(9,19);
 INSERT INTO CHILD_X_GIFT(id_child, id_gift) VALUES(11,23);
 
-
 INSERT INTO CHILDREN_HISTORY(id_child, country, valid_from, valid_to) VALUES(11,'Россия','2004-01-13', '2022-04-10'); --
 INSERT INTO CHILDREN_HISTORY(id_child, country, valid_from, valid_to) VALUES(12,'Россия','2005-09-01', '2022-09-22'); --
 INSERT INTO CHILDREN_HISTORY(id_child, country, valid_from, valid_to) VALUES(1,'Россия','2004-03-26', '2999-12-31');
@@ -143,8 +139,6 @@ INSERT INTO CHILDREN_HISTORY(id_child, country, valid_from, valid_to) VALUES(9,'
 INSERT INTO CHILDREN_HISTORY(id_child, country, valid_from, valid_to) VALUES(10,'Россия','2013-10-18','2999-12-31');
 INSERT INTO CHILDREN_HISTORY(id_child, country, valid_from, valid_to) VALUES(11,'Германия','2022-04-11','2999-12-31');
 INSERT INTO CHILDREN_HISTORY(id_child, country, valid_from, valid_to) VALUES(12,'Великобритания','2022-09-23','2999-12-31');
-
-
 
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(10,2,'управление санями','1990-01-01', '2022-12-31'); --
 INSERT INTO ELF_HISTORY(id_elf, rating, position, pos_valid_from, pos_valid_to) VALUES(1,28,'доставка подарков','2002-01-01','2999-12-31');
